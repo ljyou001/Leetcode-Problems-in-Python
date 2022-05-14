@@ -24,8 +24,8 @@ class Solution_BFS:
             depth += 1
             for _ in range(len(queue)):
                 node = queue.pop(0)
-                queue.append(node.left)
-                queue.append(node.right)
+                if node.left: queue.append(node.left)
+                if node.right: queue.append(node.right)
         return depth
 
 class Solution_DFS:
