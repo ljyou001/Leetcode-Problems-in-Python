@@ -25,6 +25,7 @@ class Solution_n_sq:
 
 ### Solution_n_sq is too slow for large input, here is another better solution
 
+# cool
 class Solution_n:
     def removeDuplicates(self, s: str, k: int) -> str:
         stack = []
