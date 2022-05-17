@@ -14,3 +14,15 @@ class Solution_slow:
                 i += 1
         return False
 
+class Solution_monotonic_stack:
+    def find132pattern(self, nums: List[int]) -> bool:
+        minleft = nums[0]
+        stack = [[nums[0],nums[0]]]
+        for i in nums[1:]:
+            while stack and i >= stack[-1][0]:
+                stack.pop()
+            if stack and i > stack[-1][1] and i<stack[-1][0]:
+                return True
+            stack.append([i,minleft])
+            minleft = min(minleft, i)
+        return False
