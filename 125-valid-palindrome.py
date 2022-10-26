@@ -23,3 +23,22 @@ class Solution:
                 i += 1
                 j -= 1
         return True
+
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = s.lower()
+        string_set = set('1234567890qwertyuiopasdfghjklzxcvbnm')
+        string = ''
+        for i in s:
+            if i in string_set:
+                string += i
+        if len(string) == 0:
+            return True
+        i = 0
+        j = len(string) - 1
+        while i < j:
+            if string[i] != string[j]:
+                return False
+            i += 1
+            j -= 1
+        return True

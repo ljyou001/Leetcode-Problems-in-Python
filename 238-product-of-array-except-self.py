@@ -53,3 +53,16 @@ class Solution_util:
             res[i] *= right
             right *= nums[i]
         return res
+
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        res = [1] * len(nums)
+        multiply = 1
+        for i in range(0, len(nums) - 1):
+            multiply *= nums[i]
+            res[i + 1] = res[i + 1] * multiply
+        multiply = 1
+        for i in range(len(nums) - 1, 0, -1):
+            multiply *= nums[i]
+            res[i - 1] = res[i - 1] * multiply
+        return res

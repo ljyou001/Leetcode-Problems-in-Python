@@ -24,3 +24,4 @@ class Solution:
             res = '0'
         
         return str(int(''.join(res)))
+
