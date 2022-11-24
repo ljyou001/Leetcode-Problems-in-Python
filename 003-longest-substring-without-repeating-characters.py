@@ -1,5 +1,24 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        i = 0
+        j = 0
+        count = {}
+        res = 0
+        
+        while j < len(s):
+            count[s[j]] = count.get(s[j], 0) + 1
+            if count[s[j]] > 1:
+                res = max(res, j - i)
+                i = i + 1
+                count = {s[i]: 1}
+                j = i
+            j += 1
+        res = max(res, j - i)
+        return res
+
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
         if len(s) < 2:
             return len(s)
         hasht = {}

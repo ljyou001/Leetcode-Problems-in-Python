@@ -21,3 +21,28 @@ class Solution:
                     while nums[j] == nums[j - 1] and j < k:
                         j += 1
         return res
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        i = 0
+        res = []
+        while i < len(nums) - 2:
+            left = i + 1
+            right = len(nums) - 1
+            while left < right:
+                three_sum = nums[i] + nums[left] + nums[right]
+                if three_sum == 0:
+                    res.append([nums[i], nums[left], nums[right]])
+                    while left + 1 < right and nums[left+1] == nums[left]:
+                        left += 1
+                    left += 1
+                    right -= 1
+                elif three_sum > 0:
+                    right -= 1
+                elif three_sum < 0:
+                    left += 1
+            while i + 1 < len(nums) - 2 and nums[i+1] == nums[i]:
+                i += 1
+            i += 1
+        return res 
