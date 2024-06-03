@@ -36,3 +36,25 @@ class Solution_compare_one_by_one:
             cur = cur.next
             lists[index] = lists[index].next
         return res.next
+
+
+class SolutionHeapMethod:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        import heapq
+        heap = []
+        dummy = ListNode()
+        cur = dummy
+
+        for li in lists:
+            while li:
+                heapq.heappush(heap, li.val)
+                li = li.next
+
+        while len(heap) > 0:
+            print(cur)
+            value = heapq.heappop(heap)
+            cur.next = ListNode(val=value)
+            cur = cur.next
+
+        return dummy.next
+        
