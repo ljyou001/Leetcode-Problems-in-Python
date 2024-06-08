@@ -45,4 +45,28 @@ class Solution:
             while i + 1 < len(nums) - 2 and nums[i+1] == nums[i]:
                 i += 1
             i += 1
-        return res 
+        return res
+        
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        if not nums or len(nums) < 3:
+            return res
+        nums.sort()
+        for i in range(len(nums) - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            left = i + 1
+            right = len(nums) - 1
+            while left < right:
+                if nums[i] + nums[left] + nums[right] == 0:
+                    res.append([nums[i], nums[left], nums[right]])
+                    while left + 1 < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    left += 1
+                    right -= 1
+                elif nums[i] + nums[left] + nums[right] < 0:
+                    left += 1
+                else: 
+                    right -= 1
+        return res
