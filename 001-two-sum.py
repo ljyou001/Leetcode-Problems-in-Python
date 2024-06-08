@@ -5,7 +5,6 @@ class Solution_me:
         for i in nums:
             hash_table[i] = count
             count += 1
-        print(hash_table)
         count = 0
         for i in nums:
             try:
@@ -15,3 +14,14 @@ class Solution_me:
                 pass
             count += 1
         return 0
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        num_count = {}
+        for i in range(len(nums)):
+            num_count[nums[i]] = i
+        
+        for i in range(len(nums)):
+            if target - nums[i] in num_count and \
+                i != num_count[target - nums[i]]:
+                return [i, num_count[target - nums[i]]]
