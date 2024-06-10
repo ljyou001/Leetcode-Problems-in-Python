@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class SolutionIterDFS:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         if not root:
             return True
@@ -19,4 +19,23 @@ class Solution:
                 iterdfs.append((node.left, level_min, node.val))
             if node.right:
                 iterdfs.append((node.right, node.val, level_max))
+        return True
+
+class SolutionInOrder:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        
+        inorder = []
+        min_val = float('-inf')
+        cur = root
+        while inorder or cur:
+            while cur:
+                inorder.append(cur)
+                cur = cur.left
+            cur = inorder.pop()
+            if cur.val <= min_val:
+                return False
+            min_val = cur.val
+            cur = cur.right
         return True
