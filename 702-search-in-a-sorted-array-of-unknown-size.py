@@ -4,7 +4,7 @@ class Solution:
     @param target: An integer
     @return: An integer which is the first index of target.
     """
-    # 702. Search in a Sorted Array of Unknown Size
+    # lint 447
     def searchBigSortedArray(self, reader, target):
         right = 0
         while reader.get(right) < target:
