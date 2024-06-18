@@ -41,3 +41,23 @@ class Solution_recursion:
             # do not forget, always return a function, otherwise you will get a None result
         else:
             return mid
+
+class SolutionTemplate:
+    def search(self, nums: List[int], target: int) -> int:
+        if not nums:
+            return -1
+        left = 0 
+        right = len(nums) - 1
+        while left + 1 < right:
+            mid = (left + right) // 2
+            if nums[mid] > target:
+                right = mid
+            elif nums[mid] < target:
+                left = mid
+            else:
+                return mid
+        if nums[left] == target:
+            return left
+        if nums[right] == target:
+            return right
+        return -1
