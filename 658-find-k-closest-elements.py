@@ -4,15 +4,12 @@ class Solution:
         if len(arr) == k:
             return arr
         left = right = self.binary_search_nearest(arr, x)
-        res = [arr[left]]
         for _ in range(k - 1):
             if self.is_left_closer(arr, left, right, x) == 'left':
                 left -= 1
-                res.append(arr[left])
             else:
                 right += 1
-                res.append(arr[right])
-        return sorted(res)
+        return arr[left: right + 1]
 
     def binary_search_nearest(self, arr, target):
         left = 0
