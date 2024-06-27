@@ -63,6 +63,12 @@ class Solution:
                     rottens.append((row, col))
         return rottens
 
+
+class NodeType:
+    EMPTY = 0
+    FRESH = 1
+    ROTTEN = 2
+
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
         if not grid or not grid[0]:
@@ -75,11 +81,12 @@ class Solution:
         # Initialize the queue with all rotten oranges and count fresh oranges
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                if grid[i][j] == 2:
+                if grid[i][j] == NodeType.ROTTEN:
                     queue.append((i, j, 0))  # (x, y, minutes)
-                elif grid[i][j] == 1:
+                elif grid[i][j] == NodeType.FRESH:
                     fresh_oranges += 1
         
+        # BFS
         minutes = 0
         while queue:
             x, y, minutes = queue.popleft()
