@@ -36,7 +36,6 @@ class Solution:
         DIRECTIONS = [(1, 0), (-1, 0), (0, 1), (0, -1)]
         queue = collections.deque([(x, y)])
         visited = set([(x, y)])
-        time = 0
         while queue:
             x, y = queue.popleft()
             for dx, dy in DIRECTIONS:
