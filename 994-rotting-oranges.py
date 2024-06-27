@@ -62,3 +62,31 @@ class Solution:
                     grid[row][col] = 0
                     rottens.append((row, col))
         return rottens
+
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        if not grid or not grid[0]:
+            return -1
+        
+        DIRECTIONS = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        queue = deque()
+        fresh_oranges = 0
+        
+        # Initialize the queue with all rotten oranges and count fresh oranges
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == 2:
+                    queue.append((i, j, 0))  # (x, y, minutes)
+                elif grid[i][j] == 1:
+                    fresh_oranges += 1
+        
+        minutes = 0
+        while queue:
+            x, y, minutes = queue.popleft()
+            for dx, dy in DIRECTIONS:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] == 1:
+                    grid[nx][ny] = 2
+                    fresh_oranges -= 1
+                    queue.append((nx, ny, minutes + 1))
+        return minutes if fresh_oranges == 0 else -1
