@@ -1,6 +1,5 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        import copy
         res = [[]]
         for i in nums:
             length = len(res) # if no limit here, the following loop will never end
@@ -10,3 +9,4 @@ class Solution:
                 res.append(newval)
         return res
 # This is also called cascading method
+
