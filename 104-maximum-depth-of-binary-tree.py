@@ -45,7 +45,7 @@ class Solution_DFS:
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class SolutionTemplate:
+class SolutionDFSTemplate:
     res = 0
     depth = 0
     def maxDepth(self, root: Optional[TreeNode]) -> int:
@@ -70,11 +70,14 @@ class SolutionTemplate:
         # After entering a node
         self.depth -= 1
 
-class SolutionDivideNConqur:
+class SolutionDivideNConqurTemplate:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
-        return 1 + max(
-            self.maxDepth(root.left),
-            self.maxDepth(root.right)
-        )
+
+        # Going into a node
+        leftmax = self.maxDepth(root.left)
+        rightmax = self.maxDepth(root.right)
+        
+        # After entering a node
+        return 1 + max(leftmax, rightmax)
