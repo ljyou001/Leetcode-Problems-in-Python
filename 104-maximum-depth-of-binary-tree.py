@@ -7,7 +7,6 @@ class TreeNode:
 
 # 3 methods: Recursive, BFS, DFS
 
-
 class Solution_Recursive:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root: return 0
@@ -39,3 +38,34 @@ class Solution_DFS:
                 stack.append((node.left, depth+1))
                 stack.append((node.right, depth+1))
         return res
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class SolutionTemplate:
+    res = 0
+    depth = 0
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        self.dfs(root)
+        return self.res
+
+    def dfs(self, root):
+        if not root:
+            # END Point
+            return 0
+        
+        # Before entering a node
+        self.depth += 1
+        self.res = max(self.res, self.depth)
+        
+        # Going into a node
+        self.dfs(root.right)
+        self.dfs(root.left)
+
+        # After entering a node
+        self.depth -= 1
