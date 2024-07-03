@@ -69,3 +69,12 @@ class SolutionTemplate:
 
         # After entering a node
         self.depth -= 1
+
+class SolutionDivideNConqur:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        return 1 + max(
+            self.maxDepth(root.left),
+            self.maxDepth(root.right)
+        )
