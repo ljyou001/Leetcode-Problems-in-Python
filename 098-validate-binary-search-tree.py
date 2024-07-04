@@ -1,3 +1,5 @@
+# LINT 095
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -38,4 +40,25 @@ class SolutionInOrder:
                 return False
             min_val = cur.val
             cur = cur.right
+        return True
+
+class SolutionRecur:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        return self.dividenconqur(root, float('-inf'), float('inf'))
+
+    def dividenconqur(self, root, minval, maxval):
+        if not root:
+            return True
+        
+        # Before entering the node 
+        if not minval < root.val < maxval:
+            return False
+        # Entering the node
+        left = self.dividenconqur(root.left, minval, root.val)
+        right = self.dividenconqur(root.right, root.val, maxval)
+        # After entering the node: pass values
+        if not left or not right:
+            return False
         return True
