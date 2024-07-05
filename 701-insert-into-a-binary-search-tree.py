@@ -6,7 +6,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
+class SolutionIter:
     def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
         if not root:
             return TreeNode(val)
@@ -23,4 +23,19 @@ class Solution:
                     cur.right = TreeNode(val)
                     return root
                 cur = cur.right
+        return root
+
+class SolutionRecur:
+    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root:
+            return TreeNode(val)
+        
+        if not root.left and val < root.val:
+            root.left = TreeNode(val)
+        if not root.right and val > root.val:
+            root.right = TreeNode(val)
+        if val < root.val:
+            self.insertIntoBST(root.left, val)
+        if val > root.val:
+            self.insertIntoBST(root.right, val)
         return root
