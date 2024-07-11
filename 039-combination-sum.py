@@ -2,6 +2,7 @@
 
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        # You need to sort candidates if forces acending order output in unsorted candidates
         res = []
         self.dfs(candidates, target, 0, [], res)
         return res
