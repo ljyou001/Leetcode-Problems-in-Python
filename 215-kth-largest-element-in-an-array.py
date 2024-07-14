@@ -13,3 +13,13 @@ class Solution_heap:
             heapq.heappop(nums)
         return heapq.heappop(nums) * -1
 
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        heap = []
+        for i in nums:
+            if len(heap) < k:
+                heappush(heap, i)
+            elif heap[0] < i:
+                heappop(heap)
+                heappush(heap, i)
+        return heap[0]
