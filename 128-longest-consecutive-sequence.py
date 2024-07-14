@@ -1,4 +1,4 @@
-class Solution_sort:
+class SolutionSort:
     def longestConsecutive(self, nums: List[int]) -> int:
         if len(nums) == 0:
             return 0
@@ -16,7 +16,7 @@ class Solution_sort:
         return max_count
 # sort method takes O(nlogn) time, O(1) space if input not counted in space
 
-class Solution_linear:
+class SolutionLinear:
     def longestConsecutive(self, nums: List[int]) -> int:
         if len(nums) == 0: return 0
         nums = set(nums)
@@ -34,7 +34,7 @@ class Solution_linear:
                 start += 1
         return max(res)
 
-class Solution_set:
+class SolutionSet:
     def longestConsecutive(self, nums: List[int]) -> int:
         num_set = set(nums)
         res = 0
@@ -58,3 +58,40 @@ class Solution_set:
         return res
         
 # Set method take O(n) time, O(n) space
+
+class SolutionSetII:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        nums = set(nums)
+        res = 0
+        while nums:
+            numb = nums.pop()
+            numb_up = numb + 1
+            numb_down = numb - 1
+            cur_res = 1
+            while numb_up in nums:
+                nums.remove(numb_up)
+                cur_res += 1
+                numb_up += 1
+            while numb_down in nums:
+                nums.remove(numb_down)
+                cur_res += 1
+                numb_down -= 1
+            res = max(res, cur_res)
+        return res
+
+class SolutionSetIII:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        longest_streak = 0
+        num_set = set(nums)
+
+        for num in num_set:
+            if num - 1 in num_set:
+                continue
+            current_num = num
+            current_streak = 1
+            while current_num + 1 in num_set:
+                current_num += 1
+                current_streak += 1
+            longest_streak = max(longest_streak, current_streak)
+
+        return longest_streak
