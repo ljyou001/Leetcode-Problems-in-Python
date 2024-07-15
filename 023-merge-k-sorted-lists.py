@@ -4,7 +4,7 @@ class ListNode:
         self.val = val
         self.next = next
 
-class Solution_brute_force:
+class SolutionBruteForce:
     def mergeKLists(self, lists):
         nodes = []
         head = point = ListNode(0)
@@ -17,7 +17,7 @@ class Solution_brute_force:
             point = point.next
         return head.next
 
-class Solution_compare_one_by_one:
+class SolutionCompareOneByOne:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         import sys
 
@@ -58,3 +58,27 @@ class SolutionHeapMethod:
 
         return dummy.next
         
+class SolutionHeapLargeMem:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        if len(lists) == 0:
+            return None
+        dummy = ListNode()
+        cur = dummy
+        heap = []
+
+        for i in range(len(lists)):
+            if not lists[i]: 
+                continue
+            heappush(heap, (lists[i].val, i))
+            lists[i] = lists[i].next
+        
+        while heap:
+            node_value, index = heappop(heap)
+            cur.next = ListNode(node_value)
+            cur = cur.next
+            if not lists[index]:
+                continue
+            heappush(heap, (lists[index].val, index))
+            lists[index] = lists[index].next
+            
+        return dummy.next
