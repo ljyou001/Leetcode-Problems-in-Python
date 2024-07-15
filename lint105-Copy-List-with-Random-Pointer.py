@@ -15,21 +15,21 @@ class Solution:
         dummy = RandomListNode(0)
         cur = dummy
         mapping = {}
-        cur_ori = head
+        cur_old = head
 
-        while cur_ori:
-            cur.next = RandomListNode(cur_ori.label)
+        while cur_old:
+            cur.next = RandomListNode(cur_old.label)
             mapping[cur.next.label] = cur.next
-            cur_ori = cur_ori.next
+            cur_old = cur_old.next
             cur = cur.next
 
-        cur_ori = head
+        cur_old = head
         cur = dummy.next
-        while cur_ori:
-            if cur_ori.random:
-                random_label = cur_ori.random.label
+        while cur_old:
+            if cur_old.random:
+                random_label = cur_old.random.label
                 cur.random = mapping[random_label]
             cur = cur.next
-            cur_ori = cur_ori.next
+            cur_old = cur_old.next
 
         return dummy.next
