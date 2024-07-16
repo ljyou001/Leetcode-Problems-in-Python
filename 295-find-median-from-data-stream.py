@@ -1,3 +1,5 @@
+# LINT 081
+
 from heapq import heappush, heappop
 
 class MedianFinder:
