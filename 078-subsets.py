@@ -10,3 +10,18 @@ class Solution:
         return res
 # This is also called cascading method
 
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        self.dfs(nums, 0, [], res)
+        return res
+
+    def dfs(self, nums, start, path, res):
+        if len(nums) == start:
+            res.append(deepcopy(path))
+            return
+        
+        path.append(nums[start])
+        self.dfs(nums, start + 1, path, res)
+        path.pop()
+        self.dfs(nums, start + 1, path, res)
