@@ -17,8 +17,7 @@ class Solution:
         if s[index] == '0':
             memo[index] = 0
             return 0
-        if s[index] != 0:
-            memo[index] += self.dfs(s, index + 1, memo)
+        memo[index] += self.dfs(s, index + 1, memo)
         if s[index] == '1' or (index + 1 < len(s) \
             and s[index] == '2' and int(s[index + 1]) < 7): 
             memo[index] += self.dfs(s, index + 2, memo)
