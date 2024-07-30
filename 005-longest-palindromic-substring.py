@@ -37,3 +37,23 @@ class Solution_exp:
                 j -= 1
                 k += 1
         return res
+
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        res = ''
+        for i in range(len(s)):
+            palin1 = self.find_palindrome(s, i, i)
+            if len(palin1) > len(res):
+                res = palin1
+            palin2 = self.find_palindrome(s, i, i + 1)
+            if len(palin2) > len(res):
+                res = palin2
+        return res
+        
+    def find_palindrome(self, s, left, right):
+        res = ''
+        while right < len(s) and left > -1 and s[left] == s[right]:
+            res = s[left:right + 1]
+            right += 1
+            left -= 1
+        return res
