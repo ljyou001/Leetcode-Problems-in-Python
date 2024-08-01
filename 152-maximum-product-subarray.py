@@ -21,3 +21,26 @@ class SolutionBasicIterDP:
             )
             res = max(dp_max[i], res)
         return res
+
+class SolutionIterDPRollingArray:
+    def maxProduct(self, nums: List[int]) -> int:
+        cur_max = cur_min = res = nums[0]
+        for num in nums[1:]:
+            if num == 0:
+                res = max(res, 0)
+                cur_max = cur_min = 1
+                continue
+            prev_max = cur_max
+            # for cur_min calculation, otherwise cur_max calculation will affect
+            cur_max = max(
+                num * cur_max,
+                num * cur_min,
+                num,
+            )
+            cur_min = min(
+                num * prev_max,
+                num * cur_min,
+                num,
+            )
+            res = max(res, cur_max)
+        return res
