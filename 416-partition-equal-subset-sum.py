@@ -1,4 +1,4 @@
-class Solution:
+class SolutionMemoSearch:
     def canPartition(self, nums: List[int]) -> bool:
         sum_num = sum(nums)
         if sum_num % 2 != 0: 
@@ -27,3 +27,22 @@ class Solution:
             memo,
         )
         return memo[(index, target)]
+
+class SolutionDPSet:
+    def canPartition(self, nums: List[int]) -> bool:
+        sum_nums = sum(nums)
+        if sum_nums % 2 != 0:
+            return False
+        target = sum_nums // 2
+        values = set()
+
+        for num in nums:
+            for value in list(values):
+                if value + num == target:
+                    return True
+                values.add(value + num)
+            if num == target:
+                return True
+            values.add(num)
+        return False
+        
