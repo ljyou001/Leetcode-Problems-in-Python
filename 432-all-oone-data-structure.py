@@ -92,12 +92,15 @@ class AllOne:
             self._delete_count_node(ori_count)
             del self.count_node[ori_count]
         
-        # FIND OUT:
-        # What's wrong with this code
+        # ori_count = self.key_count[key]
+        # self.key_count[key] -= 1
 
+        # node = self.count_node[ori_count]
+        # node.words.remove(key)
         # prv_node = node.prev
         # nxt_node = node
         # if not node.words:
+        #     nxt_node = node.next
         #     self._delete_count_node(ori_count)
         #     del self.count_node[ori_count]
         
