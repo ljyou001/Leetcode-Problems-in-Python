@@ -1,8 +1,26 @@
-
-
 class Status:
     NOUSE = 0
     DELETED = 1
+
+class SolutionMemoSearch:
+    def maximumSum(self, arr: List[int]) -> int:
+        memo = {}
+        res = self.dfs(arr, 0, Status.NOUSE, memo)
+        return max(memo.values())
+
+    def dfs(self, arr, index, deleted, memo):
+        if index == len(arr):
+            return float('-inf')
+        if (index, deleted) in memo:
+            return memo[(index, deleted)]
+
+        res = max(self.dfs(arr, index + 1, deleted, memo) + arr[index], arr[index])
+        if deleted == Status.NOUSE:
+            res = max(res, self.dfs(arr, index + 1, Status.DELETED, memo))
+        
+        memo[(index, deleted)] = res
+
+        return memo[(index, deleted)]
 
 class SolutionIterDP:
     # https://onlineboard.eu/b/1PCUD7IJ
