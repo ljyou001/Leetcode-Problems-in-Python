@@ -24,3 +24,21 @@ class Solution2:
                     return res
             res += char
         return res
+
+class SolutionTrie:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        trie = {}
+        for string in strs:
+            cur = trie
+            for char in string:
+                if char not in cur:
+                    cur[char] = {}
+                cur = cur[char]
+            cur['#'] = 1
+        cur = trie
+        lcp = ''
+        while len(cur) == 1 and '#' not in cur:
+            char = list(cur.keys())
+            lcp += char[0]
+            cur = cur[char[0]]
+        return lcp
