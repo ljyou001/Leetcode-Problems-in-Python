@@ -1,3 +1,34 @@
+DIRECTIONS = [(1, 0), (0, 1), (-1, 0), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1)]
+
+
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        if not grid or not grid[0]:
+            return -1
+        if grid[0][0] == 1:
+            return -1
+
+        queue = collections.deque([(0, 0)])
+        visited = {(0, 0): 1}
+        while queue:
+            x, y = queue.popleft()
+            if x == len(grid) - 1 and y == len(grid) - 1:
+                return visited[(x, y)]
+            for dx, dy in DIRECTIONS:
+                newx, newy = x + dx, y + dy
+                if not 0 <= newx < len(grid):
+                    continue
+                if not 0 <= newy < len(grid[0]):
+                    continue
+                if (newx, newy) in visited:
+                    continue
+                if grid[newx][newy] == 1:
+                    continue
+                visited[(newx, newy)] = visited[(x, y)] + 1
+                queue.append((newx, newy))
+        return -1
+
+
 from collections import deque
 
 class Solution_slow:
