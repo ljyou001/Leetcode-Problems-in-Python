@@ -1,11 +1,55 @@
 # lint 663
 
+from typing import (
+    List,
+)
+
+class Types:
+    WALL = -1
+    GATE = 0
+    ROOM = 2147483647
+
+DIRECTIONS = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+class Solution:
+    def walls_and_gates(self, rooms: List[List[int]]):
+        if not rooms or not rooms[0]:
+            return rooms
+        
+        for i in range(len(rooms)):
+            for j in range(len(rooms[0])):
+                if rooms[i][j] == 0:
+                    self.bfs((i, j), rooms)
+        
+        return rooms
+
+    def bfs(self, start, rooms):
+        # visited = set()
+        queue = collections.deque([start])
+        while queue:
+            x, y = queue.popleft()
+            distance_to_gate = rooms[x][y]
+            for dx, dy in DIRECTIONS:
+                newx = x + dx
+                newy = y + dy
+                if not 0 <= newx < len(rooms):
+                    continue
+                if not 0 <= newy < len(rooms[0]):
+                    continue
+                if rooms[newx][newy] < 0:
+                    continue
+                if rooms[newx][newy] <= distance_to_gate + 1:
+                    continue
+                rooms[newx][newy] = distance_to_gate + 1
+                queue.append((newx, newy))
+
+# Old lengthy way
+
 class NodeTypes:
     WALL = -1
     GATE = 0
     ROOM = 2147483647
 
-from copy import deepcopy
 import collections
 
 class Solution:
